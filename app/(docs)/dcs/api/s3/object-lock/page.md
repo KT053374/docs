@@ -59,14 +59,22 @@ Additionally, PutObjectLockConfiguration is not supported yet, so Object Lock ca
 * Gets the object lock configuration for a bucket.
 * Will return the ObjectLockConfiguration with `ObjectLockEnabled` either as `Enabled` or empty. 
   
-  `Rule` will not be included as a response element as specifying a bucket-level object Lock rule is initially out of scope.
+  `Rule` will not be included as a response element as specifying a bucket-level object Lock rule (via `PutObjectLockConfiguration`) is currently in developement.
 ---
 * PutObjectRetention
 * Places an object retention configuration on an object.
-* The only value supported for `Mode` is `COMPLIANCE` as Governance Mode is initially out of scope. 
+* 
 ---
 * GetObjectRetention
 * Retrieves an object's retention settings. 
+* 
+---
+* GetObjectLegalHold
+* Retrieves the Legal Hold status of an object.
+* 
+---
+* PutObjectLegalHold
+* Applies a Legal Hold to the specified object.
 * 
 {% /table %}
 
@@ -84,13 +92,13 @@ Additionally, PutObjectLockConfiguration is not supported yet, so Object Lock ca
 * HeadObject
 * Retrieves metadata from an object without returning the object itself.
 * HeadObject will now return:
-  * Mode (only Compliance is supported initially) that is currently in place for the requested object
+  * Mode
   * Date/time that the object's lock will expire
 ---
 * GetObject
 * Retrieves an object from a bucket.
 * GetObject will now return:
-  * Mode (only Compliance is supported initially) that is currently in place for the requested object
+  * Mode
   * Date/time that the object's lock will expire
 ---
 * PutObject
@@ -99,13 +107,13 @@ Additionally, PutObjectLockConfiguration is not supported yet, so Object Lock ca
   * Prevent locked object versions from being overwritten
   
   PutObject will now accept the following request parameters:
-  * `x-amz-object-lock-mode` (only Compliance is supported initially)
+  * `x-amz-object-lock-mode`
   * `x-amz-object-lock-retain-until-date`
 ---
 * CopyObject
 * Creates a copy of an object that is already stored on Storj.
 * CopyObject will now accept the following request parameters:
-  * `x-amz-object-lock-mode` (only Compliance is supported initially)
+  * `x-amz-object-lock-mode`
   * `x-amz-object-lock-retain-until-date`
 ---
 * CreateMultipartUpload
@@ -136,12 +144,4 @@ Additionally, PutObjectLockConfiguration is not supported yet, so Object Lock ca
 * **ObjectLockEnabled**: Indicates if Object Lock is enabled on the bucket.
 
   **Rule**: Specifies the Object Lock rule (mode and period) for the bucket. The period can be either `Days` or `Years`.
----
-* GetObjectLegalHold
-* Retrieves the Legal Hold status of an object.
-* 
----
-* PutObjectLegalHold
-* Applies a Legal Hold to the specified object.
-* 
 {% /table %}
